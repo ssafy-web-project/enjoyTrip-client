@@ -46,6 +46,9 @@ export default {};
 </script>
 
 <style scoped>
+.mainVideo {
+  height: 100vh;
+}
 .icon-main:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }

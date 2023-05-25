@@ -277,7 +277,7 @@ section {
   # Mobile Navigation
   --------------------------------------------------------------*/
 @media (max-width: 1279px) {
-  .navbar {
+  /* .navbar {
     position: fixed;
     top: 0;
     left: -100%;
@@ -285,9 +285,9 @@ section {
     bottom: 0;
     transition: 0.3s;
     z-index: 9997;
-  }
+  } */
 
-  .navbar ul {
+  /* .navbar ul {
     position: absolute;
     inset: 0;
     padding: 10px 0;
@@ -296,7 +296,7 @@ section {
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
-  }
+  } */
 
   .navbar a,
   .navbar a:focus {
