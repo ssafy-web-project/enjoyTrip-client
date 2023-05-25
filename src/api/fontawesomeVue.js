@@ -25,3 +25,6 @@ library.add(faCartShopping);
 
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
 library.add(faUtensils);
+
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+library.add(faMagnifyingGlass);

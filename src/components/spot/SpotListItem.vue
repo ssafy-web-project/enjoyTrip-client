@@ -1,27 +1,31 @@
 <template>
   <div
     class="col-lg-3 mb-5 portfolio-item"
-    :class="category(spotItem.contentTypeId)">
+    :class="category(spotItem.contentTypeId)"
+  >
     <div class="post-box">
       <div
         class="post-img text-center"
-        style="width: 250px; height: 200px; margin: auto">
+        style="width: 250px; height: 200px; margin: auto"
+      >
         <b-img
           v-if="spotItem.firstImage"
           :src="spotItem.firstImage"
           fluid
           :alt="spotItem.title"
-          style="max-width: 100%; max-height: 100%; margin: auto" />
+          style="max-width: 100%; max-height: 100%; margin: auto"
+        />
         <b-img
           v-else
           :src="require('@/assets/noimg.gif')"
           fluid
           :alt="spotItem.title"
-          style="max-width: 100%; max-height: 100%; margin: auto" />
+          style="max-width: 100%; max-height: 100%; margin: auto"
+        />
       </div>
       <h3 class="post-title">{{ spotItem.title }}</h3>
       <p>{{ spotItem.addr1 }}</p>
-      <a @click="spotDetail"
+      <a @click="spotDetail" style="cursor: pointer"
         >자세히 보기 <b-icon icon="arrow-right"></b-icon>
       </a>
     </div>

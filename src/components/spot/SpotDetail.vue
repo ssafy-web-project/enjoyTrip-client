@@ -12,18 +12,21 @@
             :src="spot.firstImage"
             fluid
             :alt="spot.title"
-            style="max-width: 100%; max-height: 100%; margin: auto" />
+            style="max-width: 100%; max-height: 100%; margin: auto"
+          />
           <b-img
             v-else
             :src="require('@/assets/profile.jpg')"
             fluid
             :alt="spot.title"
-            style="max-width: 100%; max-height: 100%; margin: auto" />
+            style="max-width: 100%; max-height: 100%; margin: auto"
+          />
         </div>
         <div
           class="mb-4 col-8 d-flex flex-wrap align-items-center ps-3"
-          id="info">
-          <div class="mt-2">
+          id="info"
+        >
+          <div class="mt-2" style="text-align: left">
             <p class="text-start" style="color: black">
               <b-icon icon="telephone-fill"></b-icon> <b>Tel :</b>
               {{ spot.tel ? spot.tel : "-" }}<br />
@@ -41,7 +44,8 @@
       <div id="voted_who">
         <div
           class="atc_who bg_grey1 scroll_wrap show"
-          style="display: flex; justify-content: center; align-items: center">
+          style="display: flex; justify-content: center; align-items: center"
+        >
           <div style="font-size: 3.5em; font-weight: bold">
             이 장소를 같이 좋아해준 사람들
           </div>
@@ -56,7 +60,8 @@
               v-for="(comment, idx) in comments"
               :key="idx"
               :comment="comment"
-              @updateComment="updateComment" />
+              @updateComment="updateComment"
+            />
           </div>
         </div>
 
@@ -74,14 +79,16 @@
                 placeholder="댓글 내용을 입력해주세요."
                 @keyup.enter="toCommentCreate"
                 v-model="commentContent"
-                style="width: 100%"></textarea>
+                style="width: 100%"
+              ></textarea>
             </div>
             <div class="cmt_write_option">
               <div class="bt_area bt_right">
                 <button
                   @click="toCommentCreate"
                   class="ib ib2 ib_color"
-                  type="submit">
+                  type="submit"
+                >
                   댓글 등록
                 </button>
               </div>

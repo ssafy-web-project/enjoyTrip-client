@@ -1,82 +1,103 @@
 <template>
   <div>
-    <b-carousel
-      id="carousel-1"
-      v-model="slide"
-      :interval="4000"
-      controls
-      indicators
-      background="#ababab"
-      img-width="1024"
-      img-height="480"
-      style="text-shadow: 1px 1px 2px #333"
-      @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd">
-      <!-- Text slides with image -->
-      <b-carousel-slide
-        caption="First slide"
-        text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-        img-src="https://picsum.photos/1024/480/?image=52"></b-carousel-slide>
-
-      <!-- Slides with custom text -->
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
-        <h1>Hello world!</h1>
-      </b-carousel-slide>
-
-      <!-- Slides with image only -->
-      <b-carousel-slide
-        img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
-
-      <!-- Slides with img slot -->
-      <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-      <b-carousel-slide>
-        <template #img>
-          <img
-            class="d-block img-fluid w-100"
-            width="1024"
-            height="480"
-            src="https://picsum.photos/1024/480/?image=55"
-            alt="image slot" />
-        </template>
-      </b-carousel-slide>
-
-      <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-      <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          eros felis, tincidunt a tincidunt eget, convallis vel est. Ut
-          pellentesque ut lacus vel interdum.
-        </p>
-      </b-carousel-slide>
-    </b-carousel>
-
-    <p class="mt-4">
-      Slide #: {{ slide }}<br />
-      Sliding: {{ sliding }}
-    </p>
+    <!-- The video -->
+    <div class="mainVideo">
+      <video autoplay muted loop id="myVideo">
+        <source src="@/assets/sea.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <!-- Optional: some overlay text to describe the video -->
+    <div class="content">
+      <h1>Let's Go on a Trip</h1>
+      <p>관광지 검색, 경로 지정, 여행지 공유</p>
+      <div class="row col-md-12 justify-content-center mb-2">
+        <!-- <font-awesome-icon icon="fa-light fa-route" style="color: #fcfcfc" /> -->
+        <div
+          class="icon-main"
+          @click="$router.push('/plan')"
+          style="cursor: pointer"
+        >
+          <div>
+            <font-awesome-icon
+              class="fontawesom"
+              icon="fa-solid fa-location-dot fa-lg"
+              size="xl"
+            />
+          </div>
+          <p>경로 검색</p>
+        </div>
+        <div
+          class="icon-main"
+          @click="$router.push('/spot')"
+          style="cursor: pointer"
+        >
+          <div>
+            <font-awesome-icon
+              icon="fa-solid fa-magnifying-glass"
+              style="color: #f5f5f5"
+              size="xl"
+            />
+          </div>
+          <p>관광지 검색</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: "TheMain",
-  components: {},
-  data() {
-    return {
-      slide: 0,
-      sliding: null,
-    };
-  },
-  methods: {
-    onSlideStart(slide) {
-      this.sliding = true;
-    },
-    onSlideEnd(slide) {
-      this.sliding = false;
-    },
-  },
-  created() {},
-};
+export default {};
 </script>
 
-<style scoped></style>
+<style scoped>
+.icon-main:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+  object-fit: fill;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 300px;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+/* Add some content at the bottom of the video/page */
+.content {
+  position: absolute;
+  bottom: 30vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #f1f1f1;
+  width: 100%;
+  height: 200px;
+  padding: 20px;
+}
+
+/* Style the button used to pause/play the video */
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
+}
+
+.icon-main {
+  width: 100px;
+  height: 80px;
+  padding-top: 15px;
+  margin-right: 10px;
+  /* flex-direction: column; */
+}
+</style>

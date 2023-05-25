@@ -3,6 +3,9 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import VueSwal from "vue-swal";
+import VueScrollTo from "vue-scrollto";
+
+Vue.use(VueScrollTo);
 
 // moment
 import "@/api/moment.js";
