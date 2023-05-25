@@ -37,14 +37,14 @@
               type="button"
               title="추천"
             >
-              <i slot="icon" class="fa fa-heart"></i>
+              <i slot="icon" style="color: #ff0000" class="fa fa-heart"></i>
               <span class="voted_count"> {{ comment.likeUserCount }}</span>
             </button>
           </div>
         </div>
       </div>
       <div class="cmt_date_wrap text_en font_grey1">
-        <div class="cmt_date">{{ comment.createdAt }}</div>
+        <div class="cmt_date">{{ comment.createdAt.slice(0, 10) }}</div>
       </div>
     </div>
   </article>

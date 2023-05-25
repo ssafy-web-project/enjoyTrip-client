@@ -36,7 +36,9 @@
                 <img
                   v-if="user.userProfileImage"
                   class="rounded-circle"
-                  :src="user.userProfileImage" />
+                  :src="
+                    'http://localhost:8080/api/v1' + user.userProfileImage
+                  " />
                 <img
                   v-else
                   class="rounded-circle"
@@ -77,7 +79,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 import http from "@/util/http.js";
 
 const storeName = "dealInfoStore";
@@ -96,6 +98,7 @@ export default {
     ...mapGetters("userStore", ["profileImgUrl"]),
   },
   methods: {
+    ...mapActions("userStore", ["getFriendCount"]),
     search() {
       this.findUser();
     },
@@ -104,7 +107,7 @@ export default {
         .get(`/user?id=${this.id}&searchWord=${this.inputKeyword}`)
         .then(({ data }) => {
           let list = data;
-          // console.log(list)
+          console.log(list);
           this.userList = list.filter((item) => !item.sameUser && !item.friend);
           // console.log(this.userList)
         })
@@ -127,6 +130,8 @@ export default {
               this.$swal("처리되었습니다.", "친구 추가가 완료되었습니다.", {
                 icon: "success",
               }).then(() => this.closeModal());
+              this.getFriendCount(this.id);
+              this.userList = null;
             })
             .catch((error) => {
               console.log(error);

@@ -7,19 +7,21 @@
     scrollable
     no-close-on-backdrop
     title="일정 공유"
-    @hidden="close">
+    @hidden="close"
+  >
     <b-container>
       <h2>{{ tour.title }}</h2>
       <p class="mb-0">by.{{ tour.name }}</p>
       <p class="mb-0">
         {{ tour.registerTime | moment("LLL") }}
-        <span class="mb-0 float-right"> 조회수 : {{ tour.hit }}</span>
+        <span class="mb-0 float-right"> 조회수 : {{ tour.hit + 1 }}</span>
       </p>
       <ul class="timeline">
         <tour-board-timeline-item
           v-for="(item, index) in tour.planInfos"
           :key="index"
-          :item="item"></tour-board-timeline-item>
+          :item="item"
+        ></tour-board-timeline-item>
       </ul>
     </b-container>
 
@@ -28,7 +30,8 @@
         <b-button
           variant="outline"
           class="float-right btn-close"
-          @click="close">
+          @click="close"
+        >
           닫기
         </b-button>
 
@@ -36,7 +39,8 @@
           v-if="id == tour.userId"
           variant="outline-danger"
           class="float-right mr-2"
-          @click="deleteSharedPlan">
+          @click="deleteSharedPlan"
+        >
           삭제하기
         </b-button>
 
@@ -44,7 +48,8 @@
           v-if="id == tour.userId"
           variant="outline-primary"
           class="float-right mr-2"
-          @click="modifySharedPlan">
+          @click="modifySharedPlan"
+        >
           수정하기
         </b-button>
       </div>

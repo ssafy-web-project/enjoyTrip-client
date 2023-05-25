@@ -12,7 +12,7 @@
             >
           </div>
           <div
-            class="row row-cols-xl-6 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-2 g-1 mb-4 row-deck">
+            class="row row-cols-xl-5 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-2 g-1 mb-4 row-deck">
             <div v-for="(item, index) in followerList" :key="index" class="col">
               <div class="card text-center">
                 <div>
@@ -35,7 +35,9 @@
                   <div class="me-auto ms-auto py-4">
                     <img
                       v-if="item.userProfileImage"
-                      :src="item.userProfileImage"
+                      :src="
+                        'http://localhost:8080/api/v1' + item.userProfileImage
+                      "
                       :alt="item.userName"
                       style="width: 140px; height: 140px"
                       class="rounded-circle" />
@@ -60,7 +62,7 @@
         <div class="col-12">
           <h1 class="h3 m-4" style="text-align: left">팔로잉 (Following)</h1>
           <div
-            class="row row-cols-xl-6 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-2 g-1 mb-4 row-deck">
+            class="row row-cols-xl-5 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-2 g-1 mb-4 row-deck">
             <div
               v-for="(item, index) in followingList"
               :key="index + 50"
@@ -86,7 +88,9 @@
                   <div class="me-auto ms-auto py-4">
                     <img
                       v-if="item.userProfileImage"
-                      :src="item.userProfileImage"
+                      :src="
+                        'http://localhost:8080/api/v1' + item.userProfileImage
+                      "
                       :alt="item.userName"
                       style="width: 140px; height: 140px"
                       class="rounded-circle" />
@@ -117,7 +121,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 import http from "@/util/http.js";
 import FriendInsertModal from "./modal/FriendInsertModal.vue";
 import FriendBookmarkModal from "./modal/FriendBookmarkModal.vue";
@@ -149,6 +153,7 @@ export default {
     this.getFollowerList();
   },
   methods: {
+    ...mapActions("userStore", ["getFriendCount"]),
     getFollowingList() {
       http
         .get(`/friend/following?id=${this.id}`)
@@ -191,6 +196,7 @@ export default {
               this.$swal("삭제 완료되었습니다.", { icon: "success" }).then(
                 (value) => {
                   this.getFollowingList();
+                  this.getFriendCount(this.id);
                 }
               );
             })

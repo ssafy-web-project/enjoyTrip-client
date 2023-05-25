@@ -8,7 +8,15 @@
         </h4>
       </div>
       <b-row>
-        <b-col md="3"><b-img thumbnail :src="item.firstImage" alt="" /></b-col>
+        <b-col md="3">
+          <b-img
+            v-if="item.firstImage"
+            thumbnail
+            :src="item.firstImage"
+            alt=""
+          />
+          <b-img v-else thumbnail :src="require('@/assets/noimg.gif')" alt="" />
+        </b-col>
         <b-col
           style="
             border-radius: 10px;

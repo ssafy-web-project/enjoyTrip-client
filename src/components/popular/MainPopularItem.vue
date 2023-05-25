@@ -4,10 +4,19 @@
       <div class="service-item">
         <div class="img">
           <img
-            :src="findImg(paths)"
+            v-if="findImg(paths)"
+            :src="findImage"
             width="416px"
             height="280px"
-            @click="selectTour" />
+            @click="selectTour"
+          />
+          <img
+            v-else
+            :src="require('@/assets/noimg.gif')"
+            width="416px"
+            height="280px"
+            @click="selectTour"
+          />
         </div>
         <div class="details position-relative">
           <a to="/boardDetail" class="stretched-link" @click="selectTour">
@@ -39,6 +48,7 @@ export default {
   name: "MainPopularItem",
   data() {
     return {
+      findImage: "",
       paths: [],
     };
   },
@@ -67,9 +77,11 @@ export default {
     findImg() {
       for (var i = 0; i < this.paths.length; i++) {
         if (this.paths[i].firstImage) {
-          return this.paths[i].firstImage;
+          this.findImage = this.paths[i].firstImage;
+          return true;
         }
       }
+      return false;
     },
   },
   watch: {

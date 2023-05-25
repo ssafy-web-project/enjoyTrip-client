@@ -74,7 +74,9 @@ export default {
       this.$router.push("/user/login");
     },
     onClickProfile() {
-      this.$router.push("/mypage");
+      if (this.$route.path !== "/mypage/detail") {
+        this.$router.push("/mypage");
+      }
     },
     toHome() {
       if (this.$route.path !== "/") {

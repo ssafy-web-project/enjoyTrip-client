@@ -1,13 +1,13 @@
 <template>
   <section id="writeSchedule" class="pb-0" data-aos="zoom-in-up">
-    <div class="container" style="min-height: 750px">
+    <div class="container" style="min-height: 768px">
       <div class="section-header">
         <h2>여행 계획 작성</h2>
       </div>
 
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
-          <div class="mb-3">
+          <div class="mb-3" style="text-align: left">
             <label for="subject" class="form-label">제목 : </label>
             <input
               type="text"
@@ -15,9 +15,10 @@
               id="subject"
               name="subject"
               placeholder="제목..."
-              v-model="title" />
+              v-model="title"
+            />
           </div>
-          <div class="mb-0">
+          <div class="mb-0" style="text-align: left">
             <label for="content" class="form-label">내용 : </label>
             <textarea
               class="form-control"
@@ -26,7 +27,8 @@
               rows="7"
               style="resize: none"
               placeholder="내용..."
-              v-model="content"></textarea>
+              v-model="content"
+            ></textarea>
           </div>
           <div class="mb-0">
             <div class="container p-0">
@@ -36,7 +38,8 @@
                     v-for="(schedule, index) in schedules"
                     :key="schedule.contentId"
                     :schedule="schedule"
-                    :num="index + 1"></plan-write-detail-item>
+                    :num="index + 1"
+                  ></plan-write-detail-item>
                 </ul>
               </section>
             </div>
@@ -47,14 +50,16 @@
               id="btn-share"
               class="btn btn-default mb-3 mr-3"
               style="background: #0ea2bd; border: none"
-              @click="share">
+              @click="share"
+            >
               여행계획 공유하기
             </button>
             <button
               type="button"
               id="btn-cancel"
-              class="btn btn-danger mb-3"
-              @click="cancel">
+              class="btn mb-3"
+              @click="cancel"
+            >
               다시 계획하기
             </button>
           </div>
@@ -136,5 +141,11 @@ export default {
 <style scoped>
 ul {
   margin-left: 1rem;
+}
+
+#btn-cancel {
+  color: #fff;
+  background-color: #0ea2bd;
+  border-color: #0ea2bd;
 }
 </style>

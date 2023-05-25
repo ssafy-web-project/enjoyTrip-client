@@ -1,5 +1,5 @@
 <template>
-  <section id="my_schedule" style="padding-top: 0">
+  <section class="planwrite" id="my_schedule" style="padding-top: 0">
     <div style="min-height: 750px; width: 29vh">
       <div class="section-header">
         <h3>나의 여행 계획</h3>
@@ -8,14 +8,19 @@
         </p>
       </div>
       <div class="schedule_list">
-        <ul class="timeline-with-icons" id="planInner">
+        <ul
+          class="timeline-with-icons"
+          id="planInner"
+          style="margin-left: 15px"
+        >
           <plan-write-item
             v-for="schedule in schedules"
             :key="schedule.contentId"
             :schedule="schedule"
             v-on:upSchedule="upSchedule"
             v-on:downSchedule="downSchedule"
-            v-on:deleteSchedule="deleteSchedule"></plan-write-item>
+            v-on:deleteSchedule="deleteSchedule"
+          ></plan-write-item>
         </ul>
         <router-link
           to="/planDetail"
@@ -57,6 +62,16 @@ export default {
 <style>
 #planInner {
   list-style-type: none;
-  padding-left: 0;
+}
+
+.planwrite {
+  padding-top: 0px;
+  position: static;
+  overflow-y: auto;
+  z-index: 1;
+  font-size: 12px;
+  text-align: center;
+  height: 84vh;
+  width: 31vh;
 }
 </style>

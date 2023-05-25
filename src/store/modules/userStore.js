@@ -13,8 +13,10 @@ const userStore = {
     name: "",
     email: "",
     phone: "",
-    profileImgUrl: require("@/assets/profile.jpg"),
+    profileImgUrl: "",
     regDt: "",
+    followerCount: 0,
+    followingCount: 0,
   },
 
   getters: {
@@ -33,6 +35,11 @@ const userStore = {
       state.password = payload.password;
       state.name = payload.name;
       state.email = payload.email;
+      if (payload.profileImgUrl) {
+        state.profileImgUrl = `http://localhost:8080/api/v1${payload.profileImgUrl}`;
+      } else {
+        state.profileImgUrl = require("@/assets/profile.jpg");
+      }
     },
     SET_USER_LOGOUT(state) {
       (state.token = ""), (state.isAuth = false);
@@ -55,9 +62,21 @@ const userStore = {
     SET_TOKEN(state, payload) {
       state.token = payload.token;
     },
+    SET_FOLLOW_COUNT(state, payload) {
+      state.followerCount = payload.followerCount;
+      state.followingCount = payload.followingCount;
+      console.log(state.followerCount);
+    },
   },
 
   actions: {
+    getFriendCount(context, id) {
+      console.log(22222);
+      http.get(`/friend/count?id=${id}`).then(({ data }) => {
+        console.log(data);
+        context.commit("SET_FOLLOW_COUNT", data);
+      });
+    },
     Authentication(context, { userId, userPassword }) {
       http
         .post("/api/v1/auth/login", {
@@ -87,6 +106,7 @@ const userStore = {
               password: data.password,
               name: data.name,
               email: data.email,
+              profileImgUrl: data.userProfileImage,
             });
           });
           router.push("/");

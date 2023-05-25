@@ -52,6 +52,11 @@ const routes = [
         name: "Join",
         component: () => import("@/components/user/Join.vue"),
       },
+      {
+        path: "password",
+        name: "FindPassword",
+        component: () => import("@/components/user/FindPassword.vue"),
+      },
     ],
   },
   {

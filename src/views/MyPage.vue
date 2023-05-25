@@ -19,7 +19,8 @@
                 @change="uploadProfileImg"
                 type="file"
                 class="form-control d-none"
-                id="avatar" />
+                id="avatar"
+              />
               <label class="position-relative" for="avatar">
                 <span class="btn btn-primary btn-sm border lift">
                   <i class="bi bi-upload"></i>&nbsp; 프로필 이미지 첨부
@@ -42,31 +43,36 @@
                         :src="profileImgUrl"
                         alt="프로필 이미지"
                         style="width: 140px; height: 140px"
-                        class="rounded-circle" />
+                        class="rounded-circle"
+                      />
                       <img
                         v-else
                         src="http://localhost:8080/images/profile_av.png"
                         alt="기본 프로필 이미지"
-                        class="rounded-circle" />
+                        class="rounded-circle"
+                      />
                     </div>
                   </div>
                   <div class="col-md-8">
                     <div class="profile-details">
                       <div
-                        class="media-body ms-md-5 m-0 mt-4 mt-md-0 text-md-start text-center">
+                        class="media-body ms-md-5 m-0 mt-4 mt-md-0 text-md-start text-center"
+                      >
                         <h5 class="font-weight-bold d-inline-block me-2">
                           {{ name }}님
                         </h5>
                         <br />
                         <a
-                          class="text-decoration-none d-inline-block text-primary">
-                          <strong>{{ followers }}</strong>
+                          class="text-decoration-none d-inline-block text-primary"
+                        >
+                          <strong>{{ this.followerCount }}</strong>
                           <span class="text-muted"> followers</span>
                         </a>
                         <br />
                         <a
-                          class="text-decoration-none d-inline-block text-primary ms-3">
-                          <strong>{{ following }}</strong>
+                          class="text-decoration-none d-inline-block text-primary ms-3"
+                        >
+                          <strong>{{ this.followingCount }}</strong>
                           <span class="text-muted"> following</span>
                         </a>
                       </div>
@@ -109,7 +115,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from "vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import http from "@/util/http.js";
 
 export default {
@@ -123,18 +129,24 @@ export default {
     };
   },
   computed: {
-    ...mapState("userStore", ["name", "id"]),
+    ...mapState("userStore", ["name", "id", "followerCount", "followingCount"]),
     ...mapGetters("userStore", ["profileImgUrl"]),
   },
   methods: {
     ...mapMutations("userStore", ["SET_USER_LOGOUT", "SET_PROFILE_IMG"]),
+    ...mapActions("userStore", ["getFriendCount"]),
     uploadProfileImg(e) {
       // single file img upload
       let attachFile = e.target.files[0];
       console.log(attachFile);
+      console.log(1111);
       if (attachFile) {
+        console.log(2222);
+        console.log(attachFile, this.id);
+        console.log(this.id);
         let formData = new FormData();
-        formData.append("profileImg", attachFile);
+        formData.append("userProfileImage", attachFile);
+        formData.append("userId", this.id);
         // alert('전송')
         http
           .post("/user/profileImg", formData, {
@@ -142,37 +154,19 @@ export default {
           })
           .then(({ data }) => {
             // console.log(data);
-            if (data.result == "login") {
-              this.$swal(
-                "세션이 만료되었거나, 로그인되지 않았습니다. 로그인 페이지로 이동합니다.",
-                { icon: "warning" }
-              ).then(() => {
-                this.SET_USER_LOGOUT();
-                this.$router.push("/user/login");
-                // 리렌더링!!
-              });
-            } else {
-              this.$swal("프로필 이미지 변경이 완료되었습니다.", {
-                icon: "success",
-              }).then((value) => {
-                this.SET_PROFILE_IMG(
-                  `http://localhost:8080${data.uploadProfileImgUrl}`
-                );
-              });
-            }
+            this.$swal("프로필 이미지 변경이 완료되었습니다.", {
+              icon: "success",
+            }).then((value) => {
+              this.SET_PROFILE_IMG(`http://localhost:8080/api/v1${data}`);
+              console.log(this.profileImgUrl);
+            });
           })
-          .catch((error) => this.$swal("aa"));
+          .catch((error) => this.$swal("에러발생"));
       }
-    },
-    getFriendCount() {
-      http.get(`/friend/count?id=${this.id}`).then(({ data }) => {
-        this.followers = data.followerCount;
-        this.following = data.followingCount;
-      });
     },
   },
   created() {
-    this.getFriendCount();
+    this.getFriendCount(this.id);
   },
 };
 </script>

@@ -4,52 +4,62 @@
       <font-awesome-icon
         v-if="schedule.theme == 12"
         class="fontawesom"
-        icon="fa-solid fa-location-dot fa-lg" />
+        icon="fa-solid fa-location-dot fa-lg"
+      />
       <font-awesome-icon
         v-if="schedule.theme == 14"
         class="fontawesom"
-        icon="fa-solid fa-landmark fa-lg" />
+        icon="fa-solid fa-landmark fa-lg"
+      />
       <font-awesome-icon
         v-if="schedule.theme == 15"
         class="fontawesom"
-        icon="fa-solid fa-calendar fa-lg" />
+        icon="fa-solid fa-calendar fa-lg"
+      />
       <font-awesome-icon
         v-if="schedule.theme == 28"
         class="fontawesom"
-        icon="fa-solid fa-person-running fa-lg" />
+        icon="fa-solid fa-person-running fa-lg"
+      />
       <font-awesome-icon
         v-if="schedule.theme == 32"
         class="fontawesom"
-        icon="fa-solid  fa-bed fa-lg" />
+        icon="fa-solid  fa-bed fa-lg"
+      />
       <font-awesome-icon
         v-if="schedule.theme == 38"
         class="fontawesom"
-        icon="fa-solid fa-cart-shopping fa-lg" />
+        icon="fa-solid fa-cart-shopping fa-lg"
+      />
       <font-awesome-icon
         v-if="schedule.theme == 39"
         class="fontawesom"
-        icon="fa-solid  fa-utensils fa-lg" />
+        icon="fa-solid  fa-utensils fa-lg"
+      />
     </span>
     <h5 class="fw-bold">{{ schedule.title }}</h5>
     <p class="text-muted mb-2 fw-bold">{{ schedule.address }}</p>
     <p class="text-muted mb-2">{{ theme(schedule.theme) }}</p>
     <div class="text-end mb-2">
       <button
-        class="btn btn-circle btn-primary btn-sm mb-1 mr-1"
+        class="btn btn-circle btn-sm mb-1 mr-1"
         name="up"
-        @click="upSchedule(schedule.contentId)">
+        @click="upSchedule(schedule.contentId)"
+      >
         <b-icon icon="chevron-up"></b-icon>
       </button>
       <button
-        class="btn btn-circle btn-primary btn-sm mb-1 mr-1"
+        class="btn btn-circle btn-sm mb-1 mr-1"
         name="down"
-        @click="downSchedule(schedule.contentId)">
+        @click="downSchedule(schedule.contentId)"
+      >
         <b-icon icon="chevron-down"></b-icon>
       </button>
       <button
-        class="btn btn-circle btn-danger btn-sm mb-1 mr-1"
+        class="btn btn-circle btn-sm mb-1 mr-1"
         name="delete"
-        @click="deleteSchedule(schedule.contentId)">
+        @click="deleteSchedule(schedule.contentId)"
+      >
         <b-icon icon="x"></b-icon>
       </button>
     </div>
@@ -97,6 +107,8 @@ export default {
   font-size: 12px;
   line-height: 1.428571429;
   border-radius: 20px;
+  background-color: #5a6167;
+  color: #fff;
 }
 .btn-circle.btn-sm {
   width: 30px;
